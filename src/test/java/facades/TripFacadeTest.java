@@ -50,7 +50,7 @@ class TripFacadeTest {
     }
 
     //Create Trip Test
-
+//test works
     @Test
     void createTrip() {
         EntityManager em = emf.createEntityManager();

@@ -7,7 +7,7 @@ import java.util.List;
 
 public class TripsDTO {
 
-    //Varibles
+    //Variables
 
     private List<TripDTO> getAllTrips = new ArrayList<>();
 

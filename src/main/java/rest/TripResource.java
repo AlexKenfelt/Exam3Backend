@@ -6,6 +6,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import dtos.GuideDTO;
 import dtos.TripsDTO;
+import entities.Guide;
 import entities.Trip;
 import errorhandling.API_Exception;
 import facades.TripFacade;
@@ -28,6 +29,7 @@ public class TripResource {
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 
     Trip trip = new Trip();
+    Guide guide = new Guide();
 
     @Context
     private UriInfo context;
@@ -76,6 +78,28 @@ public class TripResource {
         return null;
     }
 
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("create/guide")
+    public Response createGuide (String jsonString) throws API_Exception{
+        String name;
+        String gender;
+        try {
+            JsonObject json = JsonParser.parseString(jsonString).getAsJsonObject();
+            name = json.get("guideName").getAsString();
+            guide.setName(name);
+            gender = json.get("guideGender").getAsString();
+            guide.setGender(gender);
+            System.out.println(guide);
+            System.out.println(name);
+            System.out.println(gender);
+            instance.createGuide(guide);
+        } catch (Exception e) {
+            throw new API_Exception("hehe fail", 400, e);
+        }
+        return null;
+    }
 
 
     @GET
@@ -85,6 +109,8 @@ public class TripResource {
         GuideDTO g = instance.getAllGuides();
         return GSON.toJson(g);
     }
+
+    //create new guide
 
 
 

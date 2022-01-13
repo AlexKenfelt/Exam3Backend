@@ -87,6 +87,25 @@ public class TripFacade {
         }
     }
 
+    public Guide createGuide (Guide guide) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            em.getTransaction().begin();
+
+            guide.setName(guide.getName());
+            guide.setGender(guide.getGender());
+
+            em.persist(guide);
+            em.getTransaction().commit();
+        } finally {
+            em.close();
+        }
+
+        return guide;
+    }
+
+
+
 }
 
 
