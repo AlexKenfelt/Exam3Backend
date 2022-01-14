@@ -57,7 +57,7 @@ class TripFacadeTest {
        // t1.addTrip(t1)
 
     }
-    //test works
+    //test worksgit 
     @Test
     void getAllTrips() {
         try {
