@@ -3,11 +3,13 @@ package rest;
 import dtos.TripDTO;
 import entities.Trip;
 import facades.TripFacade;
+import io.restassured.http.ContentType;
 import utils.EMF_Creator;
 import io.restassured.RestAssured;
 import static io.restassured.RestAssured.given;
 import io.restassured.parsing.Parser;
 import java.net.URI;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.ws.rs.core.UriBuilder;
@@ -70,7 +72,7 @@ class TripResourceTest {
         EntityManager em = emf.createEntityManager();
     }
 
-
+    //test works
     @Test
     public void testCreateTrip() {
         Trip trip = new Trip("Iceland", "marts", "1400", "Nuuk", "12", "warm clothes");
@@ -80,7 +82,7 @@ class TripResourceTest {
                 .contentType("application/json")
                 .body(new TripDTO(trip))
                 .when()
-                .post("boat")
+                .post("trip")
                 .then()
                 .statusCode(200)
                 .body("name", equalTo("Iceland"))
@@ -89,6 +91,25 @@ class TripResourceTest {
                 .body("location", equalTo("Nuuk"))
                 .body("duration", equalTo("12"))
                 .body("packingList", equalTo("warm clothes"));
+    }
+
+    //test works
+    @Test
+    public void testGetAllTrips() {
+        List<TripDTO> trips;
+        Trip trip = new Trip("Finland", "marts", "1400", "Nuuk", "12", "warm clothes");
+
+        trips = given()
+                .contentType("application/json")
+                .accept(ContentType.JSON)
+                .when()
+                .get("/trip/alltrips").then()
+                .statusCode(200)
+                .extract()
+                .body()
+                .jsonPath()
+                .getList("trips", TripDTO.class);
+
     }
 
 

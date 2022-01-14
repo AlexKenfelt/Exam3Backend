@@ -50,14 +50,14 @@ class TripFacadeTest {
     }
 
     //Create Trip Test
-//test works
+    //test works
     @Test
     void createTrip() {
         EntityManager em = emf.createEntityManager();
        // t1.addTrip(t1)
 
     }
-
+    //test works
     @Test
     void getAllTrips() {
         try {
