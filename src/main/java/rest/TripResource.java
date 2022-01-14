@@ -110,7 +110,17 @@ public class TripResource {
         return GSON.toJson(g);
     }
 
-    //create new guide
+    // endpoints for addUserToTrip @post
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("usertotrip/{userName}/{id}")
+    public String addUserToTrip (@PathParam("id") Long id, @PathParam("userName") String userName){
+        instance.addUserToTrip(id,userName);
+        return "succes";
+
+    }
+
 
 
 

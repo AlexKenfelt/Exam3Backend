@@ -30,6 +30,9 @@ public class User implements Serializable {
 
     @ManyToMany
     private List<Role> roleList = new ArrayList<>();
+
+    @ManyToMany (mappedBy = "userTripList")
+    private List<Trip> tripList = new ArrayList<>();
 /*
     //Relation
     @ManyToMany(mappedBy = "tripList", cascade = CascadeType.PERSIST)

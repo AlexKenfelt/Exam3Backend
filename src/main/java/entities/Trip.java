@@ -32,9 +32,9 @@ public class Trip implements Serializable {
     @Column(name = "packingList")
     private String packingList;
 
-    /*
+    //Ejer relationen
     @ManyToMany
-    private User user;*/
+    private List<User> userTripList;
 
     //Constructor
 
@@ -62,6 +62,10 @@ public class Trip implements Serializable {
 
     public Trip() {
 
+    }
+
+    public void addUser (User user) {
+        userTripList.add(user);
     }
 
     //Getter and setter

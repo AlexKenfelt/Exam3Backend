@@ -6,6 +6,7 @@ import dtos.TripsDTO;
 import entities.FitnessCenter;
 import entities.Guide;
 import entities.Trip;
+import entities.User;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -104,7 +105,15 @@ public class TripFacade {
         return guide;
     }
 
+    // lav en addUserToTrip
 
+    public Trip addUserToTrip (Long id, String userName) {
+        EntityManager em = emf.createEntityManager();
+        Trip trip = em.find(Trip.class,id);
+        User user = em.find(User.class,userName);
+        trip.addUser(user);
+        return trip;
+    }
 
 }
 
