@@ -1,5 +1,6 @@
 package facades;
 
+import dtos.TripDTO;
 import dtos.TripsDTO;
 import entities.Trip;
 import org.junit.jupiter.api.*;
@@ -11,6 +12,8 @@ import javax.persistence.EntityManagerFactory;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class TripFacadeTest {
@@ -71,6 +74,23 @@ class TripFacadeTest {
             em.close();
         }
     }
+/* Virker ikke
+
+    @Test
+    public void deleteTrip(){
+        facade.deleteTrip(t3.getId());
+
+        List<TripDTO> allTrips = facade.getAllTrips().getTrips();
+
+        assertEquals(2, allTrips.size());
+
+        TripDTO t1DTO = new TripDTO(t1);
+        TripDTO t2DTO = new TripDTO(t2);
+        TripDTO t3DTO = new TripDTO(t3);
+
+        assertThat(allTrips (t3DTO)));
+
+    }*/
 
 
 }

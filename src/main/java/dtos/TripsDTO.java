@@ -29,4 +29,9 @@ public class TripsDTO {
                 "getAllTrips=" + getAllTrips +
                 '}';
     }
+
+
+    public List<TripDTO> getTrips() {
+        return getAllTrips;
+    }
 }

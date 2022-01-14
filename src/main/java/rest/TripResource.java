@@ -12,13 +12,17 @@ import errorhandling.API_Exception;
 import facades.TripFacade;
 import facades.UserFacade;
 import utils.EMF_Creator;
-
 import javax.persistence.EntityManagerFactory;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
+
 import javax.ws.rs.core.UriInfo;
+
+import javax.json.bind.Jsonb;
+
+import javax.ws.rs.core.Response;
+
 
 @Path("trip")
 public class TripResource {
@@ -110,7 +114,7 @@ public class TripResource {
         return GSON.toJson(g);
     }
 
-    // endpoints for addUserToTrip @post
+    // endpoint for addUserToTrip @post
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
@@ -119,6 +123,14 @@ public class TripResource {
         instance.addUserToTrip(id,userName);
         return "succes";
 
+    }
+
+    //endpoint deleteTrip
+    @Path("/{id}")
+    @DELETE
+    @Produces(MediaType.APPLICATION_JSON)
+    public String deleteTrip(@PathParam("id") int id) {
+        return GSON.toJson(instance.deleteTrip(id));
     }
 
 

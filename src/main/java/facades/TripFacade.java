@@ -2,6 +2,7 @@ package facades;
 
 import dtos.FitnessCenter.FitnessCentersDTO;
 import dtos.GuideDTO;
+import dtos.TripDTO;
 import dtos.TripsDTO;
 import entities.FitnessCenter;
 import entities.Guide;
@@ -113,6 +114,20 @@ public class TripFacade {
         User user = em.find(User.class,userName);
         trip.addUser(user);
         return trip;
+    }
+
+    public TripDTO deleteTrip (int id){
+        EntityManager em = emf.createEntityManager();
+        Trip trip = em.find(Trip.class, id);
+        try{
+            em.getTransaction().begin();
+            em.createNativeQuery("DELETE FROM TRIP_NAME WHERE trip_id = ?").setParameter(1, trip.getId()).executeUpdate();
+            em.remove(trip);
+            em.getTransaction().commit();
+            return new TripDTO(trip);
+        }finally {
+            em.close();
+        }
     }
 
 }
